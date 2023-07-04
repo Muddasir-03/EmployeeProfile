@@ -1,0 +1,100 @@
+﻿@model AspiraApp.AspRegister
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@{
+    Layout = null;
+
+}
+
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+
+<h2>Admin Login</h2>
+
+<body>
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" id="form">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group" id="inp">
+                @Html.LabelFor(model => model.User_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.User_Id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.User_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="inp">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="btn">
+
+                @Html.ActionLink("Sign up", "Register", "Home", new { @class = "btn btn-outline-primary" })
+
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-outline-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-size: 15px;
+        font-family:sans-serif;
+    }
+    h2{
+        width:100%;
+        text-align:center;
+        padding-top:7%;
+        padding-bottom:3%;
+    }
+    #btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 30px 30px;
+        gap: 60px;
+    }
+    #form{
+        width:100%;
+    }
+    .col-md-2 {
+        width: 100%;
+        text-align: center;
+        padding-top:15px;
+    }
+    .col-md-10{
+        width:0%;
+    }
+    #inp{
+        padding-bottom:3%;
+    }
+    label{
+        font-family:sans-serif;
+        font-size:20px;
+    }
+
+
+</style>
+

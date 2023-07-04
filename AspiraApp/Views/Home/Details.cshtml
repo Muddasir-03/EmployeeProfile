@@ -1,0 +1,64 @@
+﻿@model AspiraApp.AspStudent
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Aspira_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aspira_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tech_stack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tech_stack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Education)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile_Number)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+</p>

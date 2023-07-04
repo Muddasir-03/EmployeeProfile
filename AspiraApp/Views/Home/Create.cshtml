@@ -1,0 +1,78 @@
+﻿@model AspiraApp.AspStudent
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm("Create","Home",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aspira_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Aspira_Id, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Enter Asp Id" } })
+            @Html.ValidationMessageFor(model => model.Aspira_Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Name" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email_Id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email Id" } })
+            @Html.ValidationMessageFor(model => model.Email_Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tech_stack, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tech_stack, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Techstack" } })
+            @Html.ValidationMessageFor(model => model.Tech_stack, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Education, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Education" } })
+            @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mobile_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="row-cols-2">
+            @Html.EditorFor(model => model.Mobile_Number, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Mobile No" } })
+            @Html.ValidationMessageFor(model => model.Mobile_Number, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-outline-primary"/>
+        </div>
+    </div>
+</div>
+}
+
+
+
+<script src="~/Scripts/jquery-1.8.0.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
