@@ -125,6 +125,14 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\bgimg.jpg" />
+    <Content Include="Images\Home-img1-interface.jpg" />
+    <Content Include="Images\home.cards1.png" />
+    <Content Include="Images\home.cards2.png" />
+    <Content Include="Images\home.cards3.png" />
+    <Content Include="Images\icon_-_trans-removebg-preview.png" />
+    <Content Include="Images\lg.jpg" />
+    <Content Include="Images\Think aspimg.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -210,6 +218,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

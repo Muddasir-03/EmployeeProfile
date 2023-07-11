@@ -7,25 +7,25 @@
 <h2>Current Aspirants </h2>
 <br />
 
-@Html.ActionLink("Create New","Create")
+@Html.ActionLink("Create New", "Create")
 
 <br />
 
 <form class="d-flex">
     <input class="form-control me-2" name="searchtext" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
+    <button class="btn btn-outline-success" type="submit">Search</button>&nbsp;&nbsp;&nbsp;
 
-    @Html.ActionLink("Sort list", "Aspirants", "Home", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc": "Asc"), SortBy = "Name" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Sort list", "Aspirants", "Home", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Name" }, new { @class = "btn btn-primary", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
 
 </form>
 
 
 <br />
 
-<table class="table table-bordered table-striped table-responsive">
+<table class="table table-bordered table-striped block-center table-responsive" width="100%">
     <tr>
         <th>
-            @Html.ActionLink("Aspira_Id", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Aspira_Id" })
+            @Html.ActionLink("Aspira_Id", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Aspira_Id", PageNumber = ViewBag.PageNumber == 0 ? 1 : ViewBag.PageNumber })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -67,8 +67,8 @@
                 @Html.DisplayFor(modelItem => item.Mobile_Number)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
             </td>
         </tr>
@@ -76,10 +76,75 @@
 
 </table>
 
+@{
+    double totalPages = ViewBag.TotalPages;
+
+    <ul class="pagination">
+        @if (ViewBag.PageNumber == 1)
+        {
+            <li>
+                @Html.ActionLink("Previous", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "btn btn-info" })
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("Previous", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "btn btn-info" })
+            </li>
+        }
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+
+            if (i == ViewBag.PageNumber)
+            {
+                <li class="buttons">
+                    @Html.ActionLink(i.ToString(), "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = i }, new { @class = "btn btn-default" })
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink(i.ToString(), "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = i }, new { @class = "btn btn-default" })
+                </li>
+            }
+        }
+        @if (ViewBag.PageNumber == totalPages)
+        {
+            <li>
+                @Html.ActionLink("Next", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber }, new { @class = "btn btn-info" })
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("Next", "Aspirants", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder, SortBy = ViewBag.SortBy == null ? "Name" : ViewBag.SortBy, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "btn btn-info" })
+            </li>
+        }
+
+
+
+
+    </ul>
+}
+
+
+
 <style>
     #srch {
         padding-top: 3%;
         width: 100%;
         display: flex;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 15px;
+    }
+    .buttons{
+        background-color:cadetblue;
+        color:white;
+        border:1px solid black;
+        border-radius:3px;
     }
 </style>

@@ -9,19 +9,32 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body style="padding-top:0%">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
+            <img src="~/Images/icon_-_trans-removebg-preview.png" />&nbsp;&nbsp;&nbsp;&nbsp;
             <a class="navbar-brand" href="#">Aspira System</a>&nbsp;&nbsp;&nbsp;
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>&nbsp;&nbsp;&nbsp;
-                    <a class="nav-link active" href="#">About Us</a>&nbsp;&nbsp;&nbsp;
-                    @Html.ActionLink("Aspirants", "Aspirants", "Home", new { @class = "nav-link active nv"  })  &nbsp;&nbsp;&nbsp;
-                    @Html.ActionLink("Registration", "Register", "Home", new { @class = "nav-link active nv" })  &nbsp;&nbsp;&nbsp;
-                    @Html.ActionLink("Logout", "Login", "Home", new { @class = "nav-link active  nv" })  &nbsp;&nbsp;&nbsp;
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link active nv" })</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            @*<li>@Html.ActionLink("About Us", "About", "Home", new { @class = "nav-link active nv" })</li>*@
+                            <li>@Html.ActionLink("Aspirants", "Aspirants", "Home", new { @class = "nav-link active nv" })</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link active  nv" })</li>
+                        }
+                        else
+                        {
+                            <li> @Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link active  nv" })</li>
+
+
+                            <li>@Html.ActionLink("Register", "Register", "Home", new { @class = "nav-link active nv" })</li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
@@ -42,7 +55,14 @@
 
 </html>
 <style>
-    .nv {
-        padding-left: 50%;
+    .bg-light {
+        background-color: #f8f9fa;
+    }
+    img{
+        height:55px;
+        width:50px;
+    }
+    li{
+        gap:10px;
     }
 </style>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Security;
 
 namespace AspiraApp.Controllers
 {
@@ -15,13 +15,15 @@ namespace AspiraApp.Controllers
         {
             return View();
         }
-
+        
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+       
         [HttpPost]
         public  ActionResult Create(AspStudent aspira)
         {
@@ -66,13 +68,15 @@ namespace AspiraApp.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
-        public ActionResult Aspirants(string searchtext, string SortOrder, string SortBy)
+        public ActionResult Aspirants(string searchtext, string SortOrder, string SortBy,int PageNumber = 1)
         {
 
             AspRegistrationEntities1 db = new AspRegistrationEntities1();
 
             ViewBag.SortOrder = SortOrder;
+            ViewBag.SortBy = SortBy;
 
             var list = db.AspStudent.ToList();
 
@@ -80,25 +84,6 @@ namespace AspiraApp.Controllers
             {
                 list = db.AspStudent.Where(x => x.Name.Contains(searchtext) || x.Aspira_Id.Contains(searchtext) || x.Email_Id.Contains(searchtext) || x.Tech_stack.Contains(searchtext) || x.Education.Contains(searchtext) || x.Mobile_Number.Contains(searchtext)).ToList();
             }
-
-            //switch(SortOrder)
-            //{
-            //    case "Asc":
-            //        {
-            //            list = list.OrderBy(x => x.Name).ToList(); 
-            //            break;
-            //        }
-            //    case "Desc":
-            //        {
-            //            list = list.OrderByDescending(x => x.Name).ToList();
-            //            break;
-            //        }
-            //    default:
-            //        {
-            //            list = list.OrderBy(x => x.Name).ToList();
-            //            break;
-            //        }
-            //}
 
             switch(SortBy)
             {
@@ -155,6 +140,11 @@ namespace AspiraApp.Controllers
 
             }
 
+
+            ViewBag.TotalPages = Math.Ceiling(list.Count() / 6.0);
+            ViewBag.PageNumber = PageNumber;
+
+            list = list.Skip((PageNumber - 1) * 6).Take(6).ToList();
 
             return View(list);
 
@@ -222,11 +212,18 @@ namespace AspiraApp.Controllers
 
             if (user != null)
             {
-                return RedirectToAction("Aspirants");
+                FormsAuthentication.SetAuthCookie(log.User_Id,false);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Register");
+            return View();
 
 
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
     }
 }
